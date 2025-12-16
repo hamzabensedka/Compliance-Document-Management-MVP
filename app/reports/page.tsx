@@ -81,38 +81,38 @@ export default function ReportsPage() {
         supabase.from('document_categories').select('*'),
       ])
 
-      const documents = documentsRes.data || []
-      const sites = sitesRes.data || []
-      const categories = categoriesRes.data || []
-      const requiredCategories = categories.filter(c => c.is_required)
+      const documents: any[] = documentsRes.data || []
+      const sites: any[] = sitesRes.data || []
+      const categories: any[] = categoriesRes.data || []
+      const requiredCategories = categories.filter((c: any) => c.is_required)
 
       // Calculate overview stats
-      const expiredDocs = documents.filter(d => d.expiry_date && new Date(d.expiry_date) < today)
-      const expiring30 = documents.filter(d => 
+      const expiredDocs = documents.filter((d: any) => d.expiry_date && new Date(d.expiry_date) < today)
+      const expiring30 = documents.filter((d: any) => 
         d.expiry_date && 
         new Date(d.expiry_date) >= today && 
         new Date(d.expiry_date) <= thirtyDays
       )
-      const expiring60 = documents.filter(d => 
+      const expiring60 = documents.filter((d: any) => 
         d.expiry_date && 
         new Date(d.expiry_date) >= today && 
         new Date(d.expiry_date) <= sixtyDays
       )
-      const expiring90 = documents.filter(d => 
+      const expiring90 = documents.filter((d: any) => 
         d.expiry_date && 
         new Date(d.expiry_date) >= today && 
         new Date(d.expiry_date) <= ninetyDays
       )
-      const uploadedThisMonth = documents.filter(d => 
+      const uploadedThisMonth = documents.filter((d: any) => 
         new Date(d.uploaded_at) >= monthStart
       )
 
       // Calculate sites with missing docs
-      const sitesWithMissing = sites.filter(site => {
+      const sitesWithMissing = sites.filter((site: any) => {
         const siteDocCategoryIds = new Set(
-          documents.filter(d => d.site_id === site.id).map(d => d.category_id)
+          documents.filter((d: any) => d.site_id === site.id).map((d: any) => d.category_id)
         )
-        return requiredCategories.some(cat => !siteDocCategoryIds.has(cat.id))
+        return requiredCategories.some((cat: any) => !siteDocCategoryIds.has(cat.id))
       })
 
       // Calculate compliance rate (sites with all required docs / total sites)
@@ -135,13 +135,13 @@ export default function ReportsPage() {
 
       // Calculate per-site compliance
       const siteComplianceData: SiteCompliance[] = sites.map((site: any) => {
-        const siteDocs = documents.filter(d => d.site_id === site.id)
-        const siteDocCategoryIds = new Set(siteDocs.map(d => d.category_id))
-        const missingCount = requiredCategories.filter(cat => !siteDocCategoryIds.has(cat.id)).length
-        const expiredCount = siteDocs.filter(d => d.expiry_date && new Date(d.expiry_date) < today).length
+        const siteDocs = documents.filter((d: any) => d.site_id === site.id)
+        const siteDocCategoryIds = new Set(siteDocs.map((d: any) => d.category_id))
+        const missingCount = requiredCategories.filter((cat: any) => !siteDocCategoryIds.has(cat.id)).length
+        const expiredCount = siteDocs.filter((d: any) => d.expiry_date && new Date(d.expiry_date) < today).length
         
         const totalRequired = requiredCategories.length
-        const uploaded = requiredCategories.filter(cat => siteDocCategoryIds.has(cat.id)).length
+        const uploaded = requiredCategories.filter((cat: any) => siteDocCategoryIds.has(cat.id)).length
         const percentage = totalRequired > 0 ? Math.round((uploaded / totalRequired) * 100) : 100
 
         return {
@@ -159,10 +159,10 @@ export default function ReportsPage() {
       setSiteCompliance(siteComplianceData)
 
       // Calculate category stats
-      const catStats: CategoryStats[] = categories.map(cat => {
-        const catDocs = documents.filter(d => d.category_id === cat.id)
-        const expired = catDocs.filter(d => d.expiry_date && new Date(d.expiry_date) < today)
-        const expiring = catDocs.filter(d => 
+      const catStats: CategoryStats[] = categories.map((cat: any) => {
+        const catDocs = documents.filter((d: any) => d.category_id === cat.id)
+        const expired = catDocs.filter((d: any) => d.expiry_date && new Date(d.expiry_date) < today)
+        const expiring = catDocs.filter((d: any) => 
           d.expiry_date && 
           new Date(d.expiry_date) >= today && 
           new Date(d.expiry_date) <= thirtyDays

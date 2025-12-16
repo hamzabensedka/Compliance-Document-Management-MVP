@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js'
 import { createSupabaseClient } from '@/lib/supabase/client'
 import { NextResponse } from 'next/server'
-import type { Database } from '@/types/database'
 
 export async function POST(request: Request) {
   try {
@@ -43,7 +42,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    const adminClient = createClient<Database>(supabaseUrl, supabaseServiceKey, {
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey, {
       auth: {
         autoRefreshToken: false,
         persistSession: false,

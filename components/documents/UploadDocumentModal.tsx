@@ -32,15 +32,16 @@ export default function UploadDocumentModal({
 
   // Load categories when modal opens
   useEffect(() => {
-    if (isOpen) {
+    const loadCategories = async () => {
       const supabase = createSupabaseClient()
-      supabase
+      const { data } = await supabase
         .from('document_categories')
         .select('*')
         .order('name')
-        .then(({ data }) => {
-          if (data) setCategories(data)
-        })
+      if (data) setCategories(data as DocumentCategory[])
+    }
+    if (isOpen) {
+      loadCategories()
     }
   }, [isOpen])
 

@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import type { AuditLog, UserProfile } from '@/types/database'
 
-interface AuditLogWithUser extends AuditLog {
+type AuditLogWithUser = Omit<AuditLog, 'user'> & {
   user?: UserProfile | null
 }
 

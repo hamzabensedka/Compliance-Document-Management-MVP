@@ -21,7 +21,7 @@ import {
 import Link from 'next/link'
 import type { Site, Organization, UserProfile } from '@/types/database'
 
-interface SiteWithStats extends Site {
+type SiteWithStats = Omit<Site, 'organization'> & {
   organization?: Organization | null
   documents_count: number
 }
@@ -398,7 +398,7 @@ function SiteFormModal({
   onSuccess,
   onError 
 }: { 
-  site?: Site
+  site?: SiteWithStats | Site
   organizations: Organization[]
   currentUser: UserProfile | null
   onClose: () => void

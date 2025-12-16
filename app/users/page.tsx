@@ -22,7 +22,7 @@ import {
 import Button from '@/components/ui/Button'
 import type { UserProfile, Organization, UserRole } from '@/types/database'
 
-interface UserWithOrg extends UserProfile {
+type UserWithOrg = Omit<UserProfile, 'organization'> & {
   organization?: Organization | null
 }
 

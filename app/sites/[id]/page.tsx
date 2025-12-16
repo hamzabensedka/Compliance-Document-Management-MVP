@@ -21,7 +21,7 @@ import {
 } from 'lucide-react'
 import type { Site, Document, DocumentCategory, UserProfile } from '@/types/database'
 
-interface DocumentWithUploader extends Document {
+type DocumentWithUploader = Omit<Document, 'uploader'> & {
   uploader?: { full_name: string; email: string } | null
 }
 

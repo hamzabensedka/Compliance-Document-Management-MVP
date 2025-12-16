@@ -99,7 +99,7 @@ export async function getMissingDocuments(): Promise<MissingDocument[]> {
         (site.documents || []).map((d: { category_id: string }) => d.category_id)
       )
       const missing = requiredCategories.filter(
-        (cat) => !uploadedCategories.has(cat.id)
+        (cat: { id: string; name: string; description: string | null }) => !uploadedCategories.has(cat.id)
       )
 
       if (missing.length > 0) {
@@ -155,7 +155,7 @@ export async function getDashboardStats() {
       .select('id')
       .eq('organization_id', profile.organization_id)
 
-    const siteIds = orgSites?.map((s) => s.id) || []
+    const siteIds = orgSites?.map((s: { id: string }) => s.id) || []
     if (siteIds.length > 0) {
       totalDocsQuery = totalDocsQuery.in('site_id', siteIds)
       expiringQuery = expiringQuery.in('site_id', siteIds)
@@ -175,7 +175,7 @@ export async function getDashboardStats() {
       .select('site_id')
       .eq('user_id', user.id)
 
-    const siteIds = managedSites?.map((s) => s.site_id) || []
+    const siteIds = managedSites?.map((s: { site_id: string }) => s.site_id) || []
     if (siteIds.length > 0) {
       totalDocsQuery = totalDocsQuery.in('site_id', siteIds)
       expiringQuery = expiringQuery.in('site_id', siteIds)
