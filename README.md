@@ -235,7 +235,16 @@ Make sure to set all environment variables in your hosting platform:
 
 ## Manual Test Checklist
 
-See `MANUAL_TEST_CHECKLIST.md` for comprehensive testing guidelines.
+See [docs/MANUAL_TEST_CHECKLIST.md](docs/MANUAL_TEST_CHECKLIST.md) for comprehensive testing guidelines.
+
+## Additional documentation
+
+| Doc | Description |
+|-----|-------------|
+| [docs/QUICK_START.md](docs/QUICK_START.md) | Quick start guide |
+| [docs/DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) | Deployment instructions |
+| [docs/ADMIN_SETUP_GUIDE.md](docs/ADMIN_SETUP_GUIDE.md) | Admin account setup |
+| [docs/PROJECT_SUMMARY.md](docs/PROJECT_SUMMARY.md) | Project overview |
 
 ## Support
 

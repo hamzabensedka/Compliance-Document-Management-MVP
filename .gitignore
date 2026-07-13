@@ -63,3 +63,4 @@ logs
 
 # Optional eslint cache
 .eslintcache
+.cursor/extensions/
