@@ -64,3 +64,4 @@ logs
 # Optional eslint cache
 .eslintcache
 .cursor/extensions/
+JOB_APPLICATION_ANSWERS.html
